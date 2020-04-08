@@ -1,4 +1,4 @@
-// CS Basics-DoubleLinkedList In C++.cpp : This file contains the 'main' function. Program execution begins and ends there.
+// main : This file contains the 'main' function. Program execution begins and ends there.
 //
 
 #include <iostream>
