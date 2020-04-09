@@ -37,6 +37,11 @@ void IntDoubleLinkedList::Append(int n)
 	len++;
 }
 
+void ArcaneScience::IntDoubleLinkedList::Push(int n)
+{
+	// TODO: IMPLEMENT THIS 
+}
+
 int IntDoubleLinkedList::PopFirst()
 {
 	if (len == 0)throw 333; 
