@@ -47,6 +47,22 @@ int IntDoubleLinkedList::PopFirst()
 	nextToThat->pre = toReturn->pre;
 	delete toReturn;
 	len--;
+	stray_pointer = dummy_head->next;
+	stray_index = 0; 
+	return res;
+}
+
+// TODO: Test it. 
+int IntDoubleLinkedList::PopLast()
+{
+	if (len == 0) throw 333; 
+	Node* toReturn = dummy_tail->pre;
+	Node* toReturnPre = toReturn->pre;
+	dummy_tail->pre = toReturnPre;
+	toReturnPre->next = dummy_tail;
+	int res = toReturn->data;
+	len--;
+	delete toReturn;
 	return res;
 }
 
@@ -81,19 +97,78 @@ int& IntDoubleLinkedList::operator[](int i)
 	return n->data;
 }
 
-void IntDoubleLinkedList::Insert(int i)
+IntDoubleLinkedList& IntDoubleLinkedList::operator++()
 {
 
+	// TODO: Test this method. 
+	if (!HasNext()) throw 222;
+	stray_index++;
+	stray_pointer = stray_pointer->next;
+	return *this;
 }
 
-void IntDoubleLinkedList::MarkCurrentDelete()
+IntDoubleLinkedList& IntDoubleLinkedList::operator--()
 {
+	// TODO: test
+	if (!HasPre()) throw 222;
+	stray_index--;
+	stray_pointer = stray_pointer->pre;
+	return *this;
 }
 
-int IntDoubleLinkedList::Peek() const
-{
-	return 0;
+void IntDoubleLinkedList::DeletNext()
+{	// TODO: Test it. 
+	if (!HasNext()) throw 222; 
+	Node* toDel = stray_pointer->next;
+	stray_pointer = toDel->next;
+	delete toDel;
+	len--;
 }
+
+//TODO: Test
+int* IntDoubleLinkedList::PeekCurrent() const
+{
+	if ( stray_pointer == dummy_head || stray_pointer == dummy_tail)
+		return nullptr;
+
+	return &(stray_pointer->data);
+}
+
+int* ArcaneScience::IntDoubleLinkedList::PeekNext() const
+{
+	// TODO: test this 
+	if (!HasNext()) return nullptr;
+
+	return &(stray_pointer->next->data);
+}
+
+bool IntDoubleLinkedList::HasNext() const
+{
+
+	// TODO: Test this
+	return stray_pointer != dummy_tail;
+}
+
+bool IntDoubleLinkedList::HasPre() const
+{
+	//TODO: Test this 
+	return stray_pointer != dummy_head;
+}
+
+void IntDoubleLinkedList::ResetToHead()
+{
+	// TODO: test this
+	stray_pointer = dummy_head;
+	stray_index = 0;
+}
+
+void ArcaneScience::IntDoubleLinkedList::RestToTail()
+{
+	// TODO: Test this. 
+	stray_pointer = dummy_tail;
+	stray_index = len - 1;
+}
+
 
 // nullptr return if there input invalid. 
 Node* IntDoubleLinkedList::GetNodeAtIndex(int i)
