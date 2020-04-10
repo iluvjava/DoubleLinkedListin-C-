@@ -6,6 +6,8 @@
 using namespace std;
 using namespace ArcaneScience;
 
+int const TEST_ERROR = 300; 
+
 void Test1() // Append, Popfirst, Pop last. 
 {
     // Append, Pop last 
@@ -70,16 +72,47 @@ void Test3()
     cout << arr.ToString() << endl;
 }
 
-// Test the Iterator 
-void test4()
+// Test the Iterator. 
+void Test4()
 {
     IntDoubleLinkedList arr = IntDoubleLinkedList();
-
     for (int I = 0; I < 10; I++)arr.Append(I);
 
-
+    arr.ResetToHead();
+    {
+        int I = 0; 
+        while (arr.HasNext())
+        {
+            if (I != *arr.PeekNext())
+            {
+                cout << "Expect: " << I << " But: " << *arr.PeekNext() << endl;
+                throw TEST_ERROR; 
+            }
+            I++;
+            ++arr;
+        }
+    }
+    arr.RestToTail(); 
+    {
+        int I = arr.size() - 1;
+        while (arr.HasPre())
+        {
+            --arr;
+            if (I != *arr.PeekCurrent())
+            {
+                cout << "Expect: " << I << " But: " << *arr.PeekCurrent() << endl;
+                throw TEST_ERROR;
+            }
+            --I;
+        }
+    }
 }
 
+// Test Delete with iterator. 
+void Test5()
+{
+
+}
 
 void MemoryLeakTest()
 {
@@ -98,9 +131,18 @@ int main()
 
     cout << "Ok, now we run the tests" << endl; 
 
-    Test1();
-    Test2();
-    Test3(); 
+    try {
+
+        Test1();
+        Test2();
+        Test3();
+        Test4();
+    }
+    catch (int TEST_ERROR)
+    {
+        cout << "Test Failed" << endl; 
+        exit(-1);
+    }
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

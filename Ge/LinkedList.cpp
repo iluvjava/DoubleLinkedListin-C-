@@ -30,12 +30,10 @@ IntDoubleLinkedList::IntDoubleLinkedList()
 
 IntDoubleLinkedList::~IntDoubleLinkedList()
 {
-
-	// TODO: IMPLEMENT THIS SHIT. 
+	// TODO: TEST THIS	
 	while (len != 0)this->PopFirst();
 	delete dummy_head;
 	delete dummy_tail;
-
 }
 
 void IntDoubleLinkedList::Append(int n)
@@ -120,8 +118,6 @@ int& IntDoubleLinkedList::operator[](int i)
 
 IntDoubleLinkedList& IntDoubleLinkedList::operator++()
 {
-
-	// TODO: Test this method. 
 	if (!HasNext()) throw 222;
 	stray_index++;
 	stray_pointer = stray_pointer->next;
@@ -151,7 +147,6 @@ int* IntDoubleLinkedList::PeekCurrent() const
 {
 	if ( stray_pointer == dummy_head || stray_pointer == dummy_tail)
 		return nullptr;
-
 	return &(stray_pointer->data);
 }
 
@@ -165,20 +160,16 @@ int* ArcaneScience::IntDoubleLinkedList::PeekNext() const
 
 bool IntDoubleLinkedList::HasNext() const
 {
-
-	// TODO: Test this
-	return stray_pointer != dummy_tail;
+	return stray_pointer->next != dummy_tail;
 }
 
 bool IntDoubleLinkedList::HasPre() const
 {
-	//TODO: Test this 
-	return stray_pointer != dummy_head;
+	return stray_pointer->pre != dummy_head;
 }
 
 void IntDoubleLinkedList::ResetToHead()
 {
-	// TODO: test this
 	stray_pointer = dummy_head;
 	stray_index = 0;
 }

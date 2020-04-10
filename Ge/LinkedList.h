@@ -26,6 +26,8 @@ namespace ArcaneScience // gonna learn how to use namespaces.
 
 	public:
 		IntDoubleLinkedList();
+		IntDoubleLinkedList(const IntDoubleLinkedList& c) = delete; // Copy constructor not supported. 
+		IntDoubleLinkedList& operator= (const IntDoubleLinkedList& c) = delete; // assignment operator not supported. 
 		virtual ~IntDoubleLinkedList();
 		void Append(int n);
 		void Push(int n);
