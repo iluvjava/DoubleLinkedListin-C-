@@ -22,10 +22,11 @@ namespace ArcaneScience // gonna learn how to use namespaces.
 		Node* dummy_tail = nullptr;
 		Node* stray_pointer = nullptr;
 		int stray_index = 0;
-		int len = 0;
+		unsigned int len = 0;
 
 	public:
 		IntDoubleLinkedList();
+		virtual ~IntDoubleLinkedList();
 		void Append(int n);
 		void Push(int n);
 		int PopFirst(); // reset stray pointer.

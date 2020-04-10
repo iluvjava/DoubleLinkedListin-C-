@@ -1,0 +1,38 @@
+Clustring High Dimensional Data with MST
+
+Data: 
+    A set of points, denoted using set "V"
+        * |V| = n
+    Produce a full graph: K_n with points from V. 
+        * |E| = (n(n-1))/2
+        Edges Distance Metric: 
+            * 2 norm
+            * Other norms
+
+Clustering: 
+    Can be clustered from 1 to n clusters. 
+    A clear objective is need to optimize for the number of 
+    Partitioning. 
+    
+    Objective: 
+        * Minimizes the average distance between all vertices. 
+        * Minimizes the total distance for all clusters. 
+    
+    Algorithm: 
+        * Modified Kruskal.
+        * Disjoint Set with Memo. 
+
+Analysis: 
+    
+    Compare this strategy with Accord.Net's K means clustering on 
+    Transition matrices with data points having dimention more 
+    than 700. 
+    
+    Investigate the following: 
+        * How does MST perform in high dimensional data points compare 
+        to k-mean clustering? 
+
+Tools: 
+    * c#
+    * Some of the libraries I already wrote.
+    * Accord.Net.Math; machine learning library for c#. 

@@ -6,32 +6,101 @@
 using namespace std;
 using namespace ArcaneScience;
 
-void Test1()
+void Test1() // Append, Popfirst, Pop last. 
 {
-    IntDoubleLinkedList arr = *(new IntDoubleLinkedList());
-    for (int I = 0; I < 100; I++, arr.Append(I));
-    cout << arr.ToString() << endl;
+    // Append, Pop last 
+    {
+        IntDoubleLinkedList arr = IntDoubleLinkedList();
+        // this is static, no delete?! Destructor automatically evoked. 
+        for (int I = 0; I < 10; I++, arr.Append(I));
+        cout << arr.ToString() << endl;
+        while (arr.size() != 0)
+        {
+            arr.PopFirst();
+            cout << arr.ToString() << endl;
+        }
+    }
+
+    // Append, Pop first. 
+    {
+        IntDoubleLinkedList arr = IntDoubleLinkedList();
+
+        for (int I = 0; I < 10; I++, arr.Append(I));
+        cout << arr.ToString() << endl;
+        while (arr.size() != 0)
+        {
+            arr.PopLast();
+            cout << arr.ToString() << endl;
+        }
+    }
 }
 
-// Indexer! 
+// Testing Indexer
 void Test2()
 {
-    IntDoubleLinkedList arr = *(new IntDoubleLinkedList());
-    for (int I = 0; I < 100; I++, arr.Append(I));
+
+    cout << "Testing Indexer: " << endl; 
+
+    IntDoubleLinkedList arr = IntDoubleLinkedList();
+    for (int I = 0; I < 10; I++, arr.Append(I));
     
     for (int I = 0; I < arr.size(); I++)
     {
         arr[I] = -1;
     }
     cout << arr.ToString() << endl;
+
+    for (int I = 0; I < arr.size(); I+=2)
+    {
+        arr[I] = 1;
+    }
+    cout << arr.ToString() << endl;
+}
+
+// Testing Append and push 
+void Test3()
+{
+    IntDoubleLinkedList arr = IntDoubleLinkedList();
+
+    for (int I = 0; I < 10; I++)
+    {
+        arr.Append(I);
+        arr.Push(I); 
+    }
+    cout << arr.ToString() << endl;
+}
+
+// Test the Iterator 
+void test4()
+{
+    IntDoubleLinkedList arr = IntDoubleLinkedList();
+
+    for (int I = 0; I < 10; I++)arr.Append(I);
+
+
 }
 
 
+void MemoryLeakTest()
+{
+
+}
+
 int main()
 {
-    std::cout << "Executing...";
+    cout << "Executing..." << endl;
+    cout << "Creates and delete the object." << endl; 
+    
+    {
+        IntDoubleLinkedList* arr = new IntDoubleLinkedList();
+        delete arr;
+    }
+
+    cout << "Ok, now we run the tests" << endl; 
+
     Test1();
     Test2();
+    Test3(); 
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

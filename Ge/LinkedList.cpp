@@ -23,9 +23,19 @@ IntDoubleLinkedList::IntDoubleLinkedList()
 	n1->next = n2; 
 	n2->pre = n1;
 	stray_index = 0;
-	stray_pointer = dummy_head;
+	stray_pointer = n1;
 	dummy_head = n1;
 	dummy_tail = n2;
+}
+
+IntDoubleLinkedList::~IntDoubleLinkedList()
+{
+
+	// TODO: IMPLEMENT THIS SHIT. 
+	while (len != 0)this->PopFirst();
+	delete dummy_head;
+	delete dummy_tail;
+
 }
 
 void IntDoubleLinkedList::Append(int n)
@@ -39,7 +49,10 @@ void IntDoubleLinkedList::Append(int n)
 
 void ArcaneScience::IntDoubleLinkedList::Push(int n)
 {
-	// TODO: IMPLEMENT THIS 
+	Node* newNode = new Node(dummy_head, n, dummy_head->next);
+	dummy_head->next->pre = newNode;
+	dummy_head->next = newNode;
+	len++;
 }
 
 int IntDoubleLinkedList::PopFirst()
@@ -50,14 +63,15 @@ int IntDoubleLinkedList::PopFirst()
 	int res = toReturn->data;
 	dummy_head->next = toReturn->next;
 	nextToThat->pre = toReturn->pre;
+	
 	delete toReturn;
+	
 	len--;
 	stray_pointer = dummy_head->next;
 	stray_index = 0; 
 	return res;
 }
 
-// TODO: Test it. 
 int IntDoubleLinkedList::PopLast()
 {
 	if (len == 0) throw 333; 
@@ -67,7 +81,9 @@ int IntDoubleLinkedList::PopLast()
 	toReturnPre->next = dummy_tail;
 	int res = toReturn->data;
 	len--;
+	
 	delete toReturn;
+	
 	return res;
 }
 
